@@ -1,9 +1,6 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import SpendingBreakdownChart from '@/components/charts/SpendingBreakdownChart';
-import MonthlyTrendsChart from '@/components/charts/MonthlyTrendsChart';
-import AccountDistributionChart from '@/components/charts/AccountDistributionChart';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 
@@ -61,18 +58,10 @@ const DashboardPage = () => {
         <motion.div className="lg:col-span-2 space-y-6" variants={cardVariants}>
           <Card>
             <CardHeader>
-              <CardTitle>Spending Breakdown</CardTitle>
+              <CardTitle>Welcome</CardTitle>
             </CardHeader>
             <CardContent>
-              <SpendingBreakdownChart />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Monthly Trends</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <MonthlyTrendsChart />
+              <p>Your financial summary will be displayed here.</p>
             </CardContent>
           </Card>
         </motion.div>
@@ -106,14 +95,6 @@ const DashboardPage = () => {
             </CardHeader>
             <CardContent>
               {anomalyLoading ? <p>Analyzing spending...</p> : <p>{anomalyData?.message}</p>}
-            </CardContent>
-          </Card>
-           <Card>
-            <CardHeader>
-              <CardTitle>Account Distribution</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <AccountDistributionChart />
             </CardContent>
           </Card>
         </motion.div>
