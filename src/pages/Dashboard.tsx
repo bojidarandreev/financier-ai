@@ -5,6 +5,7 @@ import SpendingBreakdownChart from '@/components/charts/SpendingBreakdownChart';
 import MonthlyTrendsChart from '@/components/charts/MonthlyTrendsChart';
 import AccountDistributionChart from '@/components/charts/AccountDistributionChart';
 import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 
 const fetchForecast = async () => {
   const { data } = await axios.get('/api/ai/forecast');
@@ -36,12 +37,28 @@ const DashboardPage = () => {
     mutationFn: fetchAdvice,
   });
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <motion.div 
+        className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: {
+              staggerChildren: 0.1,
+            },
+          },
+        }}
+      >
         {/* Main column */}
-        <div className="lg:col-span-2 space-y-6">
+        <motion.div className="lg:col-span-2 space-y-6" variants={cardVariants}>
           <Card>
             <CardHeader>
               <CardTitle>Spending Breakdown</CardTitle>
@@ -58,10 +75,10 @@ const DashboardPage = () => {
               <MonthlyTrendsChart />
             </CardContent>
           </Card>
-        </div>
+        </motion.div>
 
         {/* Right sidebar */}
-        <div className="space-y-6">
+        <motion.div className="space-y-6" variants={cardVariants}>
           <Card>
             <CardHeader>
               <CardTitle>AI Budget Advisor</CardTitle>
@@ -78,7 +95,7 @@ const DashboardPage = () => {
           <Card>
             <CardHeader>
               <CardTitle>AI Forecast</CardTitle>
-            </Header>
+            </CardHeader>
             <CardContent>
               {forecastLoading ? <p>Generating forecast...</p> : <p>{forecastData?.forecast}</p>}
             </CardContent>
@@ -99,8 +116,8 @@ const DashboardPage = () => {
               <AccountDistributionChart />
             </CardContent>
           </Card>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
