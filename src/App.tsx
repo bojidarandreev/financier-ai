@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import LoginPage from './pages/Login';
 import DashboardPage from './pages/Dashboard';
 import TransactionsPage from './pages/Transactions';
+import AccountsPage from './pages/Accounts';
+import CategoriesPage from './pages/Categories';
 import { AuthProvider } from './components/AuthProvider';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
@@ -27,7 +29,8 @@ function App() {
             >
               <Route path="/" element={<DashboardPage />} />
               <Route path="/transactions" element={<TransactionsPage />} />
-              {/* Add other protected routes here */}
+              <Route path="/accounts" element={<AccountsPage />} />
+              <Route path="/categories" element={<CategoriesPage />} />
             </Route>
           </Routes>
         </Router>
