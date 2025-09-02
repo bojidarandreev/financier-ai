@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+}
+
+model Account {
+  id          String        @id @default(uuid())
+  name        String
+  institution String?
+  currency    String
+  type        String
+  transactions Transaction[]
+}
+
+model Category {
+  id              String             @id @default(uuid())
+  name            String             @unique
+  icon            String?
+  color           String?
+  transactions    Transaction[]
+  budgets         Budget[]
+  transactionItems TransactionItem[]
+}
+
+model Transaction {
+  id            String    @id @default(uuid())
+  date          DateTime
+  amount        Float
+  description   String
+  note          String?
+  receiptUrl    String?
+
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  accountId   String
+
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  String?
+
+  items       TransactionItem[]
+}
+
+model TransactionItem {
+  id          String      @id @default(uuid())
+  description String
+  amount      Float
+
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  transactionId String
+
+  category    Category?   @relation(fields: [categoryId], references: [id])
+  categoryId  String?
+}
+
+model Budget {
+  id          String   @id @default(uuid())
+  period      String
+  amount      Float
+  rollover    Boolean  @default(false)
+
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId  String
+}
+
+model AIAdvice {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  advice    Json
+  prompt    String
+}
