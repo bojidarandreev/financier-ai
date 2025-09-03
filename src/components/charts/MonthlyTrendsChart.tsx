@@ -15,7 +15,7 @@ const MonthlyTrendsChart = () => {
   });
 
   const chartData = useMemo(() => {
-    if (!transactions) return [];
+    if (!Array.isArray(transactions)) return [];
     
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
