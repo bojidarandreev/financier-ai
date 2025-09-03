@@ -83,7 +83,7 @@ const AddTransactionDialog = () => {
                             <SelectValue placeholder="Select an account" />
                         </SelectTrigger>
                         <SelectContent>
-                            {accounts?.map(account => <SelectItem key={account.id} value={account.id}>{account.name}</SelectItem>)}
+                            {Array.isArray(accounts) && accounts.map(account => <SelectItem key={account.id} value={account.id}>{account.name}</SelectItem>)}
                         </SelectContent>
                     </Select>
                 </div>
@@ -94,7 +94,7 @@ const AddTransactionDialog = () => {
                             <SelectValue placeholder="Select a category" />
                         </SelectTrigger>
                         <SelectContent>
-                            {categories?.map(category => <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>)}
+                            {Array.isArray(categories) && categories.map(category => <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>)}
                         </SelectContent>
                     </Select>
                 </div>
