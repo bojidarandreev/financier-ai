@@ -32,7 +32,7 @@ const CategoriesPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {categories?.map((category) => (
+            {Array.isArray(categories) && categories.map((category) => (
               <TableRow key={category.id}>
                 <TableCell>{category.name}</TableCell>
                 <TableCell>{category.icon}</TableCell>
