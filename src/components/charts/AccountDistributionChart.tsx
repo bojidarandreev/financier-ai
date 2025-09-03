@@ -27,7 +27,7 @@ const AccountDistributionChart = () => {
   });
 
   const chartData = useMemo(() => {
-    if (!accounts || !transactions) return [];
+    if (!Array.isArray(accounts) || !Array.isArray(transactions)) return [];
 
     const accountBalances = accounts.map(account => {
         const balance = transactions
