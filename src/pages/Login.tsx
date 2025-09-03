@@ -17,8 +17,6 @@ export default function LoginPage() {
     setIsLoading(true);
     try {
       await axios.post('/api/auth/login', { email, password });
-      // On successful login, the cookie is set. Reload the page to
-      // let the router handle the new authenticated state.
       window.location.href = '/'; 
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
@@ -32,12 +30,13 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-background to-secondary/20">
+      <Card className="w-full max-w-sm border-0 shadow-2xl shadow-black/20">
+        <CardHeader className="items-center text-center">
+          <img src="/logo.svg" alt="Financier AI Logo" className="w-12 h-12 mb-4" />
+          <CardTitle className="text-2xl">Welcome to Financier AI</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account.
+            Enter your credentials to access your dashboard.
           </CardDescription>
         </CardHeader>
         <CardContent>
