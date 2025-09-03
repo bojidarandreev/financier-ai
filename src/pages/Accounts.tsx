@@ -33,7 +33,7 @@ const AccountsPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {accounts?.map((account) => (
+            {Array.isArray(accounts) && accounts.map((account) => (
               <TableRow key={account.id}>
                 <TableCell>{account.name}</TableCell>
                 <TableCell>{account.institution}</TableCell>
