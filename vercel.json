@@ -1,11 +1,24 @@
 {
+  "version": 2,
   "builds": [
-    { "src": "package.json", "use": "@vercel/static-build" },
-    { "src": "api/index.ts", "use": "@vercel/node" }
+    { "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } },
+    { "src": "api/**/*.ts", "use": "@vercel/node" }
   ],
   "routes": [
+    { "src": "/api/setup", "dest": "/api/setup" },
+    { "src": "/api/auth/login", "dest": "/api/auth/login" },
+    { "src": "/api/auth/me", "dest": "/api/auth/me" },
+    { "src": "/api/transactions", "dest": "/api/transactions" },
+    { "src": "/api/transactions/(?<id>[^/]+)", "dest": "/api/transactions" },
+    { "src": "/api/accounts", "dest": "/api/accounts" },
+    { "src": "/api/accounts/(?<id>[^/]+)", "dest": "/api/accounts" },
+    { "src": "/api/categories", "dest": "/api/categories" },
+    { "src": "/api/categories/(?<id>[^/]+)", "dest": "/api/categories" },
+    { "src": "/api/ai/advisor", "dest": "/api/ai/advisor" },
+    { "src": "/api/ai/anomaly", "dest": "/api/ai/anomaly" },
+    { "src": "/api/ai/forecast", "dest": "/api/ai/forecast" },
+    { "src": "/api/ai/receipt-itemize", "dest": "/api/ai/receipt-itemize" },
     { "handle": "filesystem" },
-    { "src": "/api/(.*)", "dest": "/api" },
     { "src": "/.*", "dest": "/index.html" }
   ]
 }
