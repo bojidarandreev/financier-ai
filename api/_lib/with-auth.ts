@@ -8,7 +8,7 @@ export interface AuthenticatedRequest extends VercelRequest {
   };
 }
 
-type AuthenticatedApiHandler = (req: AuthenticatedRequest, res: VercelResponse) => Promise<void> | void;
+type AuthenticatedApiHandler = (req: AuthenticatedRequest, res: VercelResponse) => Promise<void | VercelResponse> | void | VercelResponse;
 
 // This is our higher-order function
 export const withAuth = (handler: AuthenticatedApiHandler) => {
