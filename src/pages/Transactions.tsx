@@ -34,7 +34,7 @@ const TransactionsPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {transactions?.map((transaction) => (
+            {Array.isArray(transactions) && transactions.map((transaction) => (
               <TableRow key={transaction.id}>
                 <TableCell>{new Date(transaction.date).toLocaleDateString()}</TableCell>
                 <TableCell>{transaction.description}</TableCell>
