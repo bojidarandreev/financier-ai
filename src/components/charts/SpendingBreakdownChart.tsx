@@ -15,11 +15,11 @@ const SpendingBreakdownChart = () => {
 
   if (isLoading) return <div>Loading Chart...</div>;
 
-  const spendingByCategory = transactions.reduce((acc, transaction) => {
+  const spendingByCategory = Array.isArray(transactions) ? transactions.reduce((acc, transaction) => {
     const categoryName = transaction.category?.name || 'Uncategorized';
     acc[categoryName] = (acc[categoryName] || 0) + transaction.amount;
     return acc;
-  }, {});
+  }, {}) : {};
 
   const chartData = Object.keys(spendingByCategory).map(key => ({
     name: key,
